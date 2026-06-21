@@ -50,6 +50,7 @@ Client *Create_Client(char *name, int fd){
 }
 
 void Destroy_Client(Client *c){
+    free(c->name);
     free(c);
 }
 
@@ -168,6 +169,7 @@ void Listen_Client(Client *c){
     server_global_broadcast(leave_msg);
     Remove_Client(c);
     close(c->fd);
+    Destroy_Client(c);
 }
 
 
